@@ -13,7 +13,7 @@ public class Colony {
       for(int i = 0; i < _numberOfScoutAnts; ++i)
         _scoutAnts.add(new ScoutAnts(map, color(145,255,0), lifetime));
       for(int i = 0; i < _numberOfNormalAnts; ++i)
-        _normalAnts.add(new NormalAnts(map, color(25, 34, 167)));
+        _normalAnts.add(new NormalAnts(map, color(169, 222, 249)));
     }
 
 

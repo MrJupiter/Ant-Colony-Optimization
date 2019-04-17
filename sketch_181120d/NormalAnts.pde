@@ -56,38 +56,46 @@ public final class NormalAnts extends Ants{
     return cellsAndDistances;
   }
 
-  private Cell getAwayFromTheNest(Map<Double, Cell> cellsAndDistances){
-    Set set = cellsAndDistances.entrySet();
-    Iterator it = set.iterator();
-    Iterator it1 = set.iterator();
-    Cell c = (Cell) ((Map.Entry)it1.next()).getValue();
-    Random rand = new Random();
+  private Cell getItAway(Map<Double, Cell> cellsAndProbabilties, Map<Double, Cell> cellsAndDistances){
+    Set set1 = cellsAndProbabilties.entrySet();
+    Iterator it1 = set1.iterator();
+    Set set2 = cellsAndDistances.entrySet();
+    Iterator it2 = set2.iterator();
 
-    /*if(cellsAndDistances.size() > 1 && cellsAndDistances.size() < 4){
+    Map<Integer, Cell> cellsAndIndexes = new TreeMap<Integer, Cell>(Collections.reverseOrder());
+    while(it1.hasNext()) {
+      Map.Entry mapCell1 = (Map.Entry)it1.next();
+      Cell c1 = (Cell) mapCell1.getValue();
+      boolean b = false;
       int i = 0;
-      while(it.hasNext()) {
-        Map.Entry mapCell = (Map.Entry)it.next();
-        if(i == rand.nextInt(cellsAndDistances.size())+1){
-          c =  (Cell) mapCell.getValue();
-        }
-        i++;
-      }
-    }*/
 
-    return c;
+      while(it2.hasNext() && b == false) {
+        Map.Entry mapCell2 = (Map.Entry)it2.next();
+        Cell c2 = (Cell) mapCell2.getValue();
+        i++;
+        if(c1.getPosition().getX() == c2.getPosition().getX() && c1.getPosition().getY() == c2.getPosition().getY()){
+          cellsAndIndexes.put(i, c1);
+          b = true;
+        }
+      }
+      it2 = set2.iterator();
+    }
+    //Map<Integer, Cell> map = new TreeMap<Integer, Cell>(cellsAndIndexes);
+    Set set = cellsAndIndexes.entrySet();
+    Iterator it = set.iterator();
+    println(cellsAndIndexes);
+    return (Cell) ((Map.Entry)it.next()).getValue();
   }
+
 
   public void moveRandomly(){
     ArrayList < Cell > neighbors = antNeighbors.getNeighbors(_map.getMapComponent(), currentPos, _map.getCellNumber());
 
     Map<Double, Cell> cellsAndProbabilties = adjacentCellsProbabilities(neighbors);
     Map<Double, Cell> cellsAndDistances = adjacentCellsDistanceToTheNest(cellsAndProbabilties);
-    println(currentPos);
     _stepsCounter++;
-    println(_stepsCounter);
-    currentPos = getAwayFromTheNest(cellsAndDistances);
-    //noLoop();
-    println(currentPos);
+    currentPos = getItAway(cellsAndProbabilties, cellsAndDistances);
+
     if(currentPos instanceof Food) println("Done!");
   }
 

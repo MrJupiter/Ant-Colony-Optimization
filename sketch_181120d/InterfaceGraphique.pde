@@ -15,7 +15,7 @@ public class InterfaceGraphique {
     private Grid _grid = new Grid();
     private PImage _mapImage = null;
 
-    public InterfaceGraphique(int dimension, int cellsize, int foodsNumber, int obstacleN){
+    public InterfaceGraphique(int dimension, int cellsize, int obstacleN){
       _width = dimension;
       _cellSize = cellsize;
       _obstacleNumber = obstacleN;

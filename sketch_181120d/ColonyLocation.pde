@@ -9,7 +9,7 @@
 public final class ColonyLocation extends Cell {
 
     public ColonyLocation(Position colonyLocationPos, int cellSize) {
-        _cellColor = new Red();
+        _cellColor = new Black();
         _position = colonyLocationPos;
         _cellSize = cellSize;
     }
