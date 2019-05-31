@@ -30,7 +30,7 @@ public final class Grid implements MapComponent {
 
     /* Useful Getter */
 
-     public ArrayList < MapComponent > getMapComponent() {
+    public ArrayList < MapComponent > getMapComponent() {
         return _element;
     }
 
@@ -48,27 +48,27 @@ public final class Grid implements MapComponent {
         _cellNumber = cellNumber;
     }
 
-    void mousePressed(int _cellSize){
-      for(MapComponent e : _element){
-        //if( ! (e instanceof Obstacle)){
-          if(((Cell)e).MouseIsOver()){
-              int index = _element.indexOf(e);
-              String type = showInputDialog("Nest or Food or Empty?");
-              Position p = ((Cell)e).getPosition();
+    void mousePressed(int _cellSize) {
+        for (MapComponent e: _element) {
+            //if( ! (e instanceof Obstacle)){
+            if (((Cell) e).MouseIsOver()) {
+                int index = _element.indexOf(e);
+                String type = showInputDialog("Nest or Food or Empty?");
+                Position p = ((Cell) e).getPosition();
 
-              String typeOfCell = (type == null || "".equals(type) || type.charAt(0) == ' ')?"":type;
+                String typeOfCell = (type == null || "".equals(type) || type.charAt(0) == ' ') ? "" : type;
 
-              if(typeOfCell.equalsIgnoreCase("nest")){
-                _element.set(index, new ColonyLocation(p, _cellSize));
-                _colony = (Cell) e;
-              }
-              if(typeOfCell.equalsIgnoreCase("food"))
-                _element.set(index, new Food(p, _cellSize));
-              if(typeOfCell.equalsIgnoreCase("empty"))
-                _element.set(index, new EmptyCell(p, _cellSize));
+                if (typeOfCell.equalsIgnoreCase("nest")) {
+                    _element.set(index, new ColonyLocation(p, _cellSize));
+                    _colony = (Cell) e;
+                }
+                if (typeOfCell.equalsIgnoreCase("food"))
+                    _element.set(index, new Food(p, _cellSize));
+                if (typeOfCell.equalsIgnoreCase("empty"))
+                    _element.set(index, new EmptyCell(p, _cellSize));
             }
-          }
-       //}
+        }
+        //}
     }
 
 }

@@ -22,7 +22,7 @@ public abstract class Cell implements MapComponent {
     }
 
     public void changeColor(CellColor newColor) {
-      _cellColor = newColor;
+        _cellColor = newColor;
     }
 
     public double distance(Cell arrive) {
@@ -30,6 +30,6 @@ public abstract class Cell implements MapComponent {
     }
 
     boolean MouseIsOver() {
-       return (mouseX > _position.getY()*_cellSize && mouseX < (_position.getY()*_cellSize + _cellSize) && mouseY > _position.getX()*_cellSize && mouseY < (_position.getX()*_cellSize + _cellSize));
+        return (mouseX > _position.getY() * _cellSize && mouseX < (_position.getY() * _cellSize + _cellSize) && mouseY > _position.getX() * _cellSize && mouseY < (_position.getX() * _cellSize + _cellSize));
     }
 }

@@ -31,7 +31,7 @@ public final class EmptyCell extends Cell {
     }
 
     public void pheromoneEvap() {
-        if(getPheromoneValue() >= 0.05)  _pheromone.evaporation();
+        if (getPheromoneValue() >= 0.05) _pheromone.evaporation();
         else _pheromone.setValue(0);
     }
 
@@ -39,16 +39,16 @@ public final class EmptyCell extends Cell {
         _pheromone.setValue(i);
     }
 
-    private void updateCellColor(){
-        if(getPheromoneValue() < 5)
+    private void updateCellColor() {
+        if (getPheromoneValue() < 5)
             _cellColor = new White();
-        else if(getPheromoneValue() >= 5 && getPheromoneValue() <= 1000)
+        else if (getPheromoneValue() >= 5 && getPheromoneValue() <= 1000)
             _cellColor = new Lumber();
-        else if(getPheromoneValue() > 1000 && getPheromoneValue() <= 2500)
+        else if (getPheromoneValue() > 1000 && getPheromoneValue() <= 2500)
             _cellColor = new CottonCandy();
-        else if(getPheromoneValue() > 2500 && getPheromoneValue() <= 4000)
+        else if (getPheromoneValue() > 2500 && getPheromoneValue() <= 4000)
             _cellColor = new Thistle();
-        else if(getPheromoneValue() > 4000 && getPheromoneValue() <= 5500)
+        else if (getPheromoneValue() > 4000 && getPheromoneValue() <= 5500)
             _cellColor = new PastelViolet();
         else
             _cellColor = new LavenderPurple();

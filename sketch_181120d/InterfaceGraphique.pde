@@ -1,3 +1,7 @@
+/**
+ * @author  Abdelmalik GHOUBIR <ghoubir.abdo@gmail.com>
+ */
+
 import static javax.swing.JOptionPane.*;
 
 /*
@@ -15,23 +19,26 @@ public class InterfaceGraphique {
     private Grid _grid = new Grid();
     private PImage _mapImage = null;
 
-    public InterfaceGraphique(int dimension, int cellsize, int obstacleN){
-      _width = dimension;
-      _cellSize = cellsize;
-      _obstacleNumber = obstacleN;
-      _cellNumber = _width / _cellSize;
-      _grid.setCellNumber(_cellNumber);
+    public InterfaceGraphique(int dimension, int cellsize, int obstacleN) {
+        _width = dimension;
+        _cellSize = cellsize;
+        _obstacleNumber = obstacleN;
+        _cellNumber = _width / _cellSize;
+        _grid.setCellNumber(_cellNumber);
     }
 
     public InterfaceGraphique(String imageName) {
-        _mapImage = loadImage(imageName);
+        ImageConvertor imageConvertor = new Image2Bin(dataPath("") + "\\" + imageName);
+        imageConvertor.convert(dataPath("") + "\\" + "binaryVersion.jpg");
+        _mapImage = loadImage(dataPath("") + "\\" + "binaryVersion.jpg");
+        _mapImage.resize(184, 184);
         _width = _mapImage.width; // _width is now the cellNumber!
         _cellSize = 5;
         _grid.setCellNumber(_width);
     }
 
-    public Grid getGrid(){
-      return _grid;
+    public Grid getGrid() {
+        return _grid;
     }
 
     public void setupMAP() {
@@ -44,7 +51,7 @@ public class InterfaceGraphique {
         _grid.drawMap();
     }
 
-    public void mousePressed(){
+    public void mousePressed() {
         _grid.mousePressed(_cellSize);
     }
 
@@ -54,28 +61,27 @@ public class InterfaceGraphique {
     }
 
     private void setupDesign() {
-      if(_mapImage == null){
-        putEmptyCells();
-        putObstacles();
-      }else
-        buildMap();
+        if (_mapImage == null) {
+            putEmptyCells();
+            putObstacles();
+        } else
+            buildMap();
     }
 
     private void buildMap() {
-      for (int i = 0; i < _mapImage.height; ++i)
-        for (int j = 0; j < _mapImage.width; ++j)
-            _cells.add(new EmptyCell(new Position(i,j), _cellSize));
+        for (int i = 0; i < _mapImage.height; ++i)
+            for (int j = 0; j < _mapImage.width; ++j)
+                _cells.add(new EmptyCell(new Position(i, j), _cellSize));
 
         for (int i = 0; i < _mapImage.height; ++i) {
-          for (int j = 0; j < _mapImage.width; ++j) {
-            if (_mapImage.pixels[_mapImage.width * i + j] == color(0,0,0)){
-              _cells.set(_mapImage.width * i + j, new Obstacle(new Position(i,j), _cellSize));
+            for (int j = 0; j < _mapImage.width; ++j) {
+                if (_mapImage.pixels[_mapImage.width * i + j] == color(0, 0, 0)) {
+                    _cells.set(_mapImage.width * i + j, new Obstacle(new Position(i, j), _cellSize));
+                } else if (_mapImage.pixels[_mapImage.width * i + j] == color(255, 255, 255)) {
+                    _cells.set(_mapImage.width * i + j, new EmptyCell(new Position(i, j), _cellSize));
+                }
             }
-            else if (_mapImage.pixels[_mapImage.width * i + j] == color(255,255,255)){
-              _cells.set(_mapImage.width * i + j, new EmptyCell(new Position(i, j), _cellSize));
-            }
-          }
-      }
+        }
     }
 
     private void putEmptyCells() {
