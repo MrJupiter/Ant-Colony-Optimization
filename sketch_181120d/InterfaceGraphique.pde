@@ -29,8 +29,13 @@ public class InterfaceGraphique {
 
     public InterfaceGraphique(String imageName) {
         ImageConvertor imageConvertor = new Image2Bin(dataPath("") + "\\" + imageName);
-        imageConvertor.convert(dataPath("") + "\\" + "binaryVersion.jpg");
-        _mapImage = loadImage(dataPath("") + "\\" + "binaryVersion.jpg");
+        String fileName = dataPath("") + "\\" + "binaryVersion.jpg";
+        imageConvertor.convert(fileName);
+        _mapImage = loadImage(fileName);
+        File f = new File(fileName);
+        if (f.exists()) {
+          f.delete();
+        }
         _mapImage.resize(184, 184);
         _width = _mapImage.width; // _width is now the cellNumber!
         _cellSize = 5;
