@@ -5,10 +5,6 @@
 import static javax.swing.JOptionPane.*;
 import java.awt.*;
 
-//float scaleFactor = 1.0;
-//float translateX = 0.0;
-//float translateY = 0.0;
-
 Button startButton;
 Button pauseButton;
 Button exitButton;
@@ -61,32 +57,9 @@ void mousePressed() {
     map1.mousePressed();
 }
 
-//void mouseWheel(MouseEvent e) {
-//  translateX -= mouseX;
-//  translateY -= mouseY;
-//  float delta = e.getCount() > 0 ? 1.05 : e.getCount() < 0 ? 1.0/1.05 : 1.0;
-//  scaleFactor *= delta;
-//  translateX *= delta;
-//  translateY *= delta;
-//  translateX += mouseX;
-//  translateY += mouseY;
-//}
-
-//void mouseDragged(MouseEvent e) {
-//  translateX += mouseX - pmouseX;
-//  translateY += mouseY - pmouseY;
-//}
-
 boolean setupBool = false;
 
 void draw() {
-    /*noStroke();
-
-    pushMatrix();
-
-    translate(translateX,translateY);
-    scale(scaleFactor);
-    */
     for (int i = 0; i < 900;) {
         if (!(i > 200 && i < 600)) image(img, 10 + i, 920, 100, 60);
         i += 100;
@@ -95,15 +68,11 @@ void draw() {
     startButton.Draw();
     pauseButton.Draw();
     exitButton.Draw();
-    //IG.drawMap();
-
     map1.drawMap();
 
     if (toggle) {
         if (!setupBool) {
             colony.setupColony(map1.getGrid(), scoutAntsLifetime);
-
-            //colony.setupColony(IG.getGrid(), scoutAntsLifetime);
             setupBool = true;
         }
 
@@ -122,6 +91,5 @@ void draw() {
         // Backward Normal Ants (free pheromone)
         // colony.normalAntsComeback(normalAntsUtilArray);
     }
-    //popMatrix();
 
 }
