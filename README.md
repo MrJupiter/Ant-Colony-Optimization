@@ -11,6 +11,7 @@ Start date : 08-11-2018
 ## Synopsis
 The purpose of this project is to develop a software with a graphical interface
 showing the dynamism of ant colony in their researches for food.
+<br/>
 <a href="https://en.wikipedia.org/wiki/Ant_colony_optimization_algorithms">
 <img src="img/2000px-Aco_branches.svg.png" width="356" height="250" ><img src="img/Ant-Colony-Optimization-ACO-algorithm.png" width="456" height="250">
 </a>
